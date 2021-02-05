@@ -6,7 +6,7 @@ public class MoveWords{
     public static final int GANA = 1;
     public static final int PIERDE = 2;
 
-    private static final String[] validMoves = {"TIJERAS", "PAPEL", "PIEDRA"};
+    private static final String[] validMoves = {"TIJERAS", "PAPEL", "PIEDRA", "LAGARTIJA", "SPOCK"};
     private static final String[] validCommands = {"SALIR", "HELP"};
 
     private Random rnd;
@@ -60,14 +60,37 @@ public class MoveWords{
     }
 
     public static int checkWinner(String first, String second){
-	    int first_i, second_i;
+	    int fi, si;
 
-	    first_i = getIndex(first);
-	    second_i = getIndex(second);
-
-	    if (first_i == second_i) return EMPATE;
+	    fi = getIndex(first);
+	    si = getIndex(second);
 	    
-	    return (( (first_i +1) % validMoves.length ) == second_i ) ? GANA: PIERDE;
+	    /*"TIJERAS" = 0
+	     "PAPEL" = 1
+	     "PIEDRA" = 2
+	     "LAGARTIJA" = 3
+	     "SPOCK" = 4*/
+
+//	    if (first_i == second_i) return EMPATE;
+//	    
+//	    return (( (first_i +1) % validMoves.length ) == second_i ) ? GANA: PIERDE;
+	    
+	    if (fi == 0 & (si == 1 || si == 3)) {
+	    	return GANA;
+	    } else if (fi == 1 && (si == 2 || si == 4)) {
+	    	return GANA;
+	    } else if (fi == 2 && (si == 3 ||  si == 0)) {
+	    	return GANA;
+	    } else if (fi == 3 && (si ==4 || si == 1)) {
+	    	return GANA;
+	    } else if (fi == 4 && (si  == 0 || si == 2)) {
+	    	return GANA;
+	    } else if (fi == si) {
+	    	return EMPATE;
+	    } else {
+	    	return PIERDE;
+	    }
+	    
 	}
 	
 } 
